@@ -25,11 +25,9 @@ api:
 
 ota:
 
-ota:
-
 # This should point to the public location of this yaml file.
 dashboard_import:
-  package_import_url: github://mwood77/home-assistant/esp-home/esp-ring.yaml@main
+  package_import_url: github://mwood77/home-assistant/esphome/esp-ring.yaml@main
 
 wifi:
   ssid: !secret wifi_ssid 

@@ -28,7 +28,6 @@ ota:
 dashboard_import:
   package_import_url: github://mwood77/home-assistant/esphome/esp-water.yaml@main
 
-
 wifi:
   ssid: !secret wifi_ssid 
   password: !secret wifi_password

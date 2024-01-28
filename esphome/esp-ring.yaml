@@ -14,7 +14,6 @@ esphome:
 esp8266:
   board: esp01_1m
 
-# Enable logging
 logger:
   level: INFO
 
@@ -36,9 +35,13 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "esphome-ring"
-    password: "123456"
+    password: ""
 
 captive_portal:
+
+# Sets up the improv via serial client for Wi-Fi provisioning.
+# Handy if your device has a usb port for the user to add credentials when they first get it.
+improv_serial:
 
 switch:
   - platform: gpio

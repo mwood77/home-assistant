@@ -28,4 +28,9 @@ action:
       entity_id: climate.living_room
     data:
       temperature: 16
+  - service: counter.increment
+    metadata: {}
+    data: {}
+    target:
+      entity_id: counter.heating_off
 mode: single

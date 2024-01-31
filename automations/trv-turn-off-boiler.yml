@@ -1,0 +1,31 @@
+alias: >-
+  Heating - TURN_OFF - Lower Nest temperature if all climates (TRVs) are equal
+  or above target.
+trigger:
+  - platform: template
+    value_template: >
+      {% set therms = [
+        states.climate.attic,
+        states.climate.kitchen,
+        states.climate.wardrobe,
+        states.climate.main_bedroom,
+        ] %}
+      {% set climates = namespace(at_target=[]) %}
+      {% for therm in therms %}
+      {% if therm.attributes.current_temperature >= therm.attributes.temperature %}
+      {% set climates.at_target = climates.at_target + [ therm.entity_id ] %}
+      {% endif %}
+      {% endfor %}
+      {{ climates.at_target | length == therms | length }}
+condition:
+  - condition: state
+    entity_id: climate.living_room      # Nest climate
+    state: heating
+    attribute: hvac_action
+action:
+  - service: climate.set_temperature    # Nest climate
+    target:
+      entity_id: climate.living_room
+    data:
+      temperature: 16
+mode: single

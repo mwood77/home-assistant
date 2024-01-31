@@ -1,0 +1,31 @@
+alias: >-
+  Heating - TURN_ON - Raise Nest temperature if any climates (TRVs) are calling
+  request heat.
+trigger:
+  - platform: template
+    value_template: >
+      {% set therms = [
+        states.climate.attic,
+        states.climate.kitchen,
+        states.climate.wardrobe,
+        states.climate.main_bedroom,
+        ] %}
+      {% set climates = namespace(under=[]) %}
+      {% for therm in therms %}
+      {% if therm.attributes.current_temperature < therm.attributes.temperature%}
+      {% set climates.under = climates.under + [ therm.entity_id ] %}
+      {%endif %}
+      {% endfor %}
+      {{ climates.under | length > 0 }}
+condition:
+  - condition: state
+    entity_id: climate.living_room
+    state: idle
+    attribute: hvac_action
+action:
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.living_room
+    data:
+      temperature: 28
+mode: single

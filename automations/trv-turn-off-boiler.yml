@@ -22,9 +22,6 @@ condition:
     entity_id: climate.living_room      # Nest climate
     state: heating
     attribute: hvac_action
-  - condition: numeric_state            # Make sure somebody is home
-    entity_id: zone.home
-    above: 0
 action:
   - service: climate.set_temperature    # Nest climate
     target:

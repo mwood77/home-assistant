@@ -9,7 +9,7 @@ esphome:
   # configuration and updates.
   project:
     name: esphome.water
-    version: "1.0"
+    version: "1.0.1"
 
 esp8266:
   board: esp01_1m
@@ -76,11 +76,11 @@ sensor:
       name: "Water Meter Total"
       unit_of_measurement: "m³"
       id: water_meter_total
-      accuracy_decimals: 3
+      accuracy_decimals: 4
       device_class: water
       state_class: total_increasing
       filters:
-        - multiply: 0.001
+        - multiply: 0.0001
 
   - platform: template
     name: "Water Usage Liter"

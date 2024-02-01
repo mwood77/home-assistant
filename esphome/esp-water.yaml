@@ -9,7 +9,7 @@ esphome:
   # configuration and updates.
   project:
     name: esphome.water
-    version: "1.0.1"
+    version: "1.1.0"
 
 esp8266:
   board: esp01_1m
@@ -24,9 +24,12 @@ api:
 
 ota:
 
-# This should point to the public location of this yaml file.
-dashboard_import:
-  package_import_url: github://mwood77/home-assistant/esphome/esp-water.yaml@main
+packages:
+  esp_water:
+    url: https://github.com/mwood77/home-assistant/esphome/
+    ref: main 
+    file: esphome/esp-water.yaml # cannot be combined with `files`
+    refresh: 60s
 
 wifi:
   ssid: !secret wifi_ssid 

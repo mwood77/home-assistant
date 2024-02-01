@@ -9,7 +9,7 @@ esphome:
   # configuration and updates.
   project:
     name: esphome.water
-    version: "1.1.0"
+    version: "1.0.1"
 
 esp8266:
   board: esp01_1m
@@ -17,17 +17,16 @@ esp8266:
 logger:
   level: INFO
 
-# Leaving this blank will enable Home Assistant to adpot it and install an API key
+# Enable Home Assistant API
 api:
+  encryption:
+    key: ""
 
 ota:
 
-packages:
-  esp_water:
-    url: https://github.com/mwood77/home-assistant
-    ref: main 
-    file: esphome/esp-water.yaml # cannot be combined with `files`
-    refresh: 60s
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://mwood77/home-assistant/esphome/esp-water.yaml@main
 
 wifi:
   ssid: !secret wifi_ssid 
@@ -91,4 +90,3 @@ sensor:
     icon: "mdi:water"
     lambda: return (id(water_pulse).state * 10);
     update_interval: 6s
-
